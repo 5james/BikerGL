@@ -3,6 +3,8 @@
 
 bool perspective = false;
 
+GLfloat kolor_mgly[4] = { 0.25f, 0.25f, 0.25f, 1.0f };
+
 //======================================== INIT =================================================
 
 void init()
@@ -44,10 +46,19 @@ void init()
 //=================================================================================================
 //===================================== DISPLAYOBJECTS ============================================
 
+void Mgla(void) {
+	glDisable(GL_FOG);
+	glEnable(GL_FOG);
+		glFogi(GL_FOG_MODE, GL_LINEAR);
+		glFogf(GL_FOG_START, -20.0f);
+		glFogf(GL_FOG_END, 80.0f);
+		glFogfv(GL_FOG_COLOR, kolor_mgly);
+}
+
 void displayObjects(int frame_no)
 {
 	glPushMatrix();
-
+	mgla();
 	if (perspective)
 	{
 		gluPerspective(30, (GLfloat)640 / 480, 7.5, 6);
